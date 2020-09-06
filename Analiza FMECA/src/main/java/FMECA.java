@@ -1,11 +1,22 @@
 
 import java.awt.Desktop;
+import java.awt.FileDialog;
+import java.awt.Frame;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -44,6 +55,8 @@ public class FMECA extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -129,6 +142,16 @@ public class FMECA extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
+        jLabel5.setText("Encyklopedia Zarządzania:");
+
+        jButton4.setText("EXPORT");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,27 +162,31 @@ public class FMECA extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(286, Short.MAX_VALUE)
+                .addGap(200, 200, 200)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(246, 246, 246))))
+                        .addGap(126, 126, 126)
+                        .addComponent(jButton4)
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,16 +195,19 @@ public class FMECA extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel5)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addContainerGap())
         );
 
@@ -212,6 +242,103 @@ public class FMECA extends javax.swing.JFrame {
             System.out.println("Delete error");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+//
+//    public void toExcel(JTable table, File file){
+//    try{
+//        TableModel model = table.getModel();
+//        FileWriter excel = new FileWriter(file);
+//
+//        for(int i = 0; i < model.getColumnCount(); i++){
+//            excel.write(model.getColumnName(i) + "\t");
+//        }
+//
+//        excel.write("\n");
+//
+//        for(int i=0; i< model.getRowCount(); i++) {
+//            for(int j=0; j < model.getColumnCount(); j++) {
+//                excel.write(model.getValueAt(i,j).toString()+"\t");
+//            }
+//            excel.write("\n");
+//        }
+//
+//        excel.close();
+//
+//    }catch(IOException e){ System.out.println(e); }
+//}
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+           
+//                            try {
+//                         File file = new File("exportedTable.xls");
+//      if (file.createNewFile()) {
+//        System.out.println("File created: " + file.getName());
+//      } else {
+//        System.out.println("File already exists.");
+//      }
+//    } catch (IOException e) {
+//      System.out.println("An error occurred.");
+//      e.printStackTrace();
+//    }
+                            
+
+
+//    FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
+//    dialog.setMode(FileDialog.LOAD);
+//    dialog.setVisible(true);
+//    String file = dialog.getFile();
+//    System.out.println(file + " chosen.");
+        
+        try{
+            
+//                                        JFileChooser chooser = new JFileChooser();
+//        FileNameExtensionFilter filter = new FileNameExtensionFilter("xls", "xlsx");
+//        chooser.setFileFilter(filter);
+//        int returnVal = chooser.showOpenDialog(null);
+//        if(returnVal == JFileChooser.APPROVE_OPTION) {
+//            System.out.println("You chose to open this file: " +
+//                    chooser.getSelectedFile().getName());
+//        }
+
+JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+		int returnValue = jfc.showOpenDialog(null);
+		// int returnValue = jfc.showSaveDialog(null);
+
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = jfc.getSelectedFile();
+			System.out.println(selectedFile.getAbsolutePath());
+                                File file = new File(selectedFile.getAbsolutePath());
+        TableModel model = jTable1.getModel();
+        FileWriter excel = new FileWriter(file);
+
+        for(int i = 0; i < model.getColumnCount(); i++){
+            excel.write(model.getColumnName(i) + "\t");
+        }
+
+        excel.write("\n");
+
+        for(int i=0; i< model.getRowCount(); i++) {
+            for(int j=0; j < model.getColumnCount(); j++) {
+                excel.write(model.getValueAt(i,j).toString()+"\t");
+            }
+            excel.write("\n");
+        }
+
+        excel.close();
+                }
+
+
+    }catch(IOException e){ System.out.println(e); }
+        
+//           JFileChooser file = new JFileChooser();
+//        file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
+//        file.showSaveDialog(null);
+//
+//        System.out.println(file.getCurrentDirectory());
+//        System.out.println(file.getSelectedFile());
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void AddRowToJTable(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -256,9 +383,11 @@ public class FMECA extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private static javax.swing.JScrollPane jScrollPane2;
     private static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

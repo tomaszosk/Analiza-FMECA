@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Tomek1
+ * @author Tomasz
  */
 public class AddRowJFrame extends javax.swing.JFrame {
 
@@ -69,6 +69,7 @@ public class AddRowJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel4.setText("ETAP I (identyfikacja obiektu):");
@@ -343,7 +344,6 @@ public class AddRowJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         R = Integer.parseInt((String)jComboBox1.getSelectedItem());
         Rn = Integer.parseInt((String)jComboBox4.getSelectedItem());
         Z = Integer.parseInt((String)jComboBox2.getSelectedItem());
@@ -377,6 +377,22 @@ public class AddRowJFrame extends javax.swing.JFrame {
             dRZW,
             Kryt,
         }); 
+        
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField15.setText("");
+        jTextField16.setText("");
+        jSlider1.setValue(50);
+        jComboBox1.setSelectedIndex(0);
+        jComboBox2.setSelectedIndex(0);
+        jComboBox3.setSelectedIndex(0);
+        jComboBox4.setSelectedIndex(0);
+        jComboBox5.setSelectedIndex(0);
+        jComboBox6.setSelectedIndex(0);
+        jComboBox8.setSelectedIndex(0);
+        jButton1.setEnabled(false);
         super.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
