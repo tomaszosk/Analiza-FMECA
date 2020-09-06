@@ -1,19 +1,12 @@
 
 import java.awt.Desktop;
-import java.awt.FileDialog;
-import java.awt.Frame;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -26,7 +19,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Tomek1
+ * @author Tomasz
  */
 public class FMECA extends javax.swing.JFrame {
 
@@ -219,20 +212,18 @@ public class FMECA extends javax.swing.JFrame {
 	try {
             browser.browse(new URI("https://mfiles.pl/pl/index.php/Analiza_FMEA"));
 	}
-	catch(IOException error) {
-	}
-	catch(URISyntaxException error) {
+	catch(IOException | URISyntaxException error) {
 	}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
         addRow.setVisible(true);
         addRow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         
         int i = jTable1.getSelectedRow();
@@ -242,102 +233,38 @@ public class FMECA extends javax.swing.JFrame {
             System.out.println("Delete error");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-//
-//    public void toExcel(JTable table, File file){
-//    try{
-//        TableModel model = table.getModel();
-//        FileWriter excel = new FileWriter(file);
-//
-//        for(int i = 0; i < model.getColumnCount(); i++){
-//            excel.write(model.getColumnName(i) + "\t");
-//        }
-//
-//        excel.write("\n");
-//
-//        for(int i=0; i< model.getRowCount(); i++) {
-//            for(int j=0; j < model.getColumnCount(); j++) {
-//                excel.write(model.getValueAt(i,j).toString()+"\t");
-//            }
-//            excel.write("\n");
-//        }
-//
-//        excel.close();
-//
-//    }catch(IOException e){ System.out.println(e); }
-//}
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-           
-//                            try {
-//                         File file = new File("exportedTable.xls");
-//      if (file.createNewFile()) {
-//        System.out.println("File created: " + file.getName());
-//      } else {
-//        System.out.println("File already exists.");
-//      }
-//    } catch (IOException e) {
-//      System.out.println("An error occurred.");
-//      e.printStackTrace();
-//    }
-                            
-
-
-//    FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
-//    dialog.setMode(FileDialog.LOAD);
-//    dialog.setVisible(true);
-//    String file = dialog.getFile();
-//    System.out.println(file + " chosen.");
         
-        try{
-            
-//                                        JFileChooser chooser = new JFileChooser();
-//        FileNameExtensionFilter filter = new FileNameExtensionFilter("xls", "xlsx");
-//        chooser.setFileFilter(filter);
-//        int returnVal = chooser.showOpenDialog(null);
-//        if(returnVal == JFileChooser.APPROVE_OPTION) {
-//            System.out.println("You chose to open this file: " +
-//                    chooser.getSelectedFile().getName());
-//        }
+        try {
+            JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
-JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            int returnValue = jfc.showOpenDialog(null);
 
-		int returnValue = jfc.showOpenDialog(null);
-		// int returnValue = jfc.showSaveDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = jfc.getSelectedFile();
+                System.out.println(selectedFile.getAbsolutePath());
+                File file = new File(selectedFile.getAbsolutePath());
+                TableModel model = jTable1.getModel();
+                FileWriter excel = new FileWriter(file);
 
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File selectedFile = jfc.getSelectedFile();
-			System.out.println(selectedFile.getAbsolutePath());
-                                File file = new File(selectedFile.getAbsolutePath());
-        TableModel model = jTable1.getModel();
-        FileWriter excel = new FileWriter(file);
-
-        for(int i = 0; i < model.getColumnCount(); i++){
-            excel.write(model.getColumnName(i) + "\t");
-        }
-
-        excel.write("\n");
-
-        for(int i=0; i< model.getRowCount(); i++) {
-            for(int j=0; j < model.getColumnCount(); j++) {
-                excel.write(model.getValueAt(i,j).toString()+"\t");
-            }
-            excel.write("\n");
-        }
-
-        excel.close();
+                for(int i = 0; i < model.getColumnCount(); i++){
+                    excel.write(model.getColumnName(i) + "\t");
                 }
 
+                excel.write("\n");
 
-    }catch(IOException e){ System.out.println(e); }
-        
-//           JFileChooser file = new JFileChooser();
-//        file.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
-//        file.showSaveDialog(null);
-//
-//        System.out.println(file.getCurrentDirectory());
-//        System.out.println(file.getSelectedFile());
-
-
+                for(int i=0; i< model.getRowCount(); i++) {
+                    for(int j=0; j < model.getColumnCount(); j++) {
+                        excel.write(model.getValueAt(i,j).toString()+"\t");
+                    }
+                    excel.write("\n");
+                }
+                excel.close();
+            }
+        } catch(IOException e) { 
+            System.out.println(e); 
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void AddRowToJTable(Object[] dataRow) {

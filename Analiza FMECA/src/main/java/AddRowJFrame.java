@@ -397,17 +397,7 @@ public class AddRowJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     static void disableAddButton(){
-        if(jTextField1.getText().length()==0) {
-            jButton1.setEnabled(false);
-        } else if(jTextField2.getText().length()==0) {
-            jButton1.setEnabled(false);
-        }  else if(jTextField3.getText().length()==0) {
-            jButton1.setEnabled(false);
-        } else if(jTextField4.getText().length()==0) {
-            jButton1.setEnabled(false);
-        } else if(jTextField15.getText().length()==0) {
-            jButton1.setEnabled(false);
-        } else if(jTextField16.getText().length()==0) {
+        if(jTextField1.getText().length()==0 || jTextField2.getText().length()==0 || jTextField3.getText().length()==0 || jTextField4.getText().length()==0 || jTextField15.getText().length()==0 || jTextField16.getText().length()==0) {
             jButton1.setEnabled(false);
         } else {
             jButton1.setEnabled(true);
