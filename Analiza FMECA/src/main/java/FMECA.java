@@ -42,6 +42,7 @@ public class FMECA extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -70,15 +71,22 @@ public class FMECA extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Obiekt", "Rodzaj wady", "Przyczyna", "Skutek", "Prawdopodobieństwo wystąpienia", "Stopień krytyczności", "Ryzyko wystąpienia (R)", "Znaczenie wady (Z)", "Możliwość wykrycia (W)", "Współczynnik ryzyka R x Z x W", "Zalecane działanie", "Osoba odpowiedzialna", "Ryzyko wystąpienia po naprawie (Rn)", "Znaczenie wady po naprawie (Zn)", "Możliwość wykrycia po naprawie (Wn)", "Współczynnik ryzyka po naprawie Rn x Zn x Wn", "Zmiana współczynnika ryzyka"
+                "Obiekt", "Rodzaj wady", "Przyczyna", "Skutek", "Prawdopodobieństwo wystąpienia", "Stopień krytyczności", "Ryzyko wystąpienia (R)", "Znaczenie wady (Z)", "Możliwość wykrycia (W)", "Zalecane działanie", "Osoba odpowiedzialna", "Ryzyko wystąpienia po naprawie (Rn)", "Znaczenie wady po naprawie (Zn)", "Możliwość wykrycia po naprawie (Wn)", "Współczynnik ryzyka R x Z x W", "Współczynnik ryzyka po naprawie Rn x Zn x Wn", "Zmiana współczynnika ryzyka", "Krytyczność"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false, false, false, false, false, true, true, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -112,6 +120,14 @@ public class FMECA extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jButton3.setText("Usuń pozycję");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,12 +150,14 @@ public class FMECA extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(315, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -156,7 +174,9 @@ public class FMECA extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -179,6 +199,18 @@ public class FMECA extends javax.swing.JFrame {
         addRow.setVisible(true);
         addRow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        int i = jTable1.getSelectedRow();
+        if(i >= 0) {
+            model.removeRow(i);
+        } else {
+            System.out.println("Delete error");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public static void AddRowToJTable(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -222,10 +254,10 @@ public class FMECA extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JScrollPane jScrollPane2;
     private static javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
