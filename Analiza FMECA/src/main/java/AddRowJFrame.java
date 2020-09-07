@@ -13,9 +13,9 @@ import javax.swing.JTextField;
  *
  * @author Tomasz
  */
-public class AddRowJFrame extends javax.swing.JFrame {
+final public class AddRowJFrame extends javax.swing.JFrame {
 
-    int R, Rn, Z, Zn, W, Wn, RZW, RZWn, dRZW, StK, Praw, Kryt;
+    int R, Z, W, RZW, RZWn, dRZW, StK, Praw, Kryt;
     /**
      * Creates new form AddRowJFrame
      */
@@ -345,13 +345,14 @@ public class AddRowJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         R = Integer.parseInt((String)jComboBox1.getSelectedItem());
-        Rn = Integer.parseInt((String)jComboBox4.getSelectedItem());
         Z = Integer.parseInt((String)jComboBox2.getSelectedItem());
-        Zn = Integer.parseInt((String)jComboBox5.getSelectedItem());
         W = Integer.parseInt((String)jComboBox3.getSelectedItem());
-        Wn = Integer.parseInt((String)jComboBox6.getSelectedItem());
         RZW = R*Z*W;
-        RZWn = Rn*Zn*Wn;
+        R = Integer.parseInt((String)jComboBox4.getSelectedItem());
+        Z = Integer.parseInt((String)jComboBox5.getSelectedItem());
+        W = Integer.parseInt((String)jComboBox6.getSelectedItem());        
+        RZWn = R*Z*W;        
+
         dRZW = RZW - RZWn;
         StK = Integer.parseInt((String)jComboBox8.getSelectedItem());
         Praw = jSlider1.getValue();
